@@ -1,3 +1,4 @@
+#!PowerShell
 # This script is inspired by Diceware, but it uses a different word list, and may have other subtle differences.
 # For more info see the offical diceware page: http://world.std.com/~reinhold/diceware.html
 # Arnold G. Reinhold does not endorse this product
@@ -26,6 +27,12 @@
 
 # I do nothing to guarentee that you won't get an offensive phrase, as this would be much more complicated, and a bad
 # implementation could greatly reduce the effective entropy of the phassphrases. Use your own discression.
+
+[CmdletBinding()]
+Param( 
+	[Int32]$minimumCharacterCount = 17, # reroll if we don't have enough characters, should be rare
+	[Int32]$wordCount = 6 # 5 is not generally considered secure enough
+)
 
 $wordList = @(
 "the",
@@ -7402,8 +7409,6 @@ $wordList = @(
 "axons"
 )
 
-$minimumCharacterCount = 17 # reroll if we don't have enough characters, should be rare
-$wordCount = 6 # 5 is not generally considered secure enough
 $bytesPerRandom = 2 # 2 bytes is more than enough to select from 7776 values
 $bitsInByte = 8 
 
